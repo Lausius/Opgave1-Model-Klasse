@@ -10,10 +10,12 @@ namespace Model_Klasse_Test
     public class FanOutputTests
     {
         FanOutput fanOutput = new FanOutput();
+
         [TestMethod]
         public void AtLeastTwoCharactersInNameTest()
         {
             Assert.AreEqual("Karl", fanOutput.Name = "Karl");
+            Assert.AreEqual("Ib", fanOutput.Name = "Ib");
             try
             {
                 fanOutput.Name = "S";
@@ -26,6 +28,13 @@ namespace Model_Klasse_Test
         }
 
         [TestMethod]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void TemperatureExceedingBoundaryLimitTest()
+        {
+            fanOutput.Temperature = 26;
+        }
+
+        [TestMethod]
         public void BoundaryValuesOfTemperatureTest()
         {
             Assert.AreEqual(15, fanOutput.Temperature = 15);
@@ -34,13 +43,18 @@ namespace Model_Klasse_Test
             {
                 fanOutput.Temperature = 14;
                 Assert.Fail();
-                fanOutput.Temperature = 26;
-                Assert.Fail();
             }
             catch (ArgumentOutOfRangeException ex)
             {
                 Assert.AreEqual("Temperaturen skal ligge mellem 15 og 25 grader celsius (Parameter 'Temperatur')", ex.Message);
             }
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void HumidityExceedingBoundaryLimitTest()
+        {
+            fanOutput.Humidity = 81;
         }
 
         [TestMethod]
@@ -52,13 +66,32 @@ namespace Model_Klasse_Test
             {
                 fanOutput.Humidity = 29;
                 Assert.Fail();
-                fanOutput.Humidity = 81;
-                Assert.Fail();
             }
             catch (ArgumentOutOfRangeException ex)
             {
                 Assert.AreEqual("Fugtigheden skal have en værdi mellem 30 og 80 (Parameter 'Fugtighed')", ex.Message);
             }
         }
+
+        [TestMethod] 
+        public void IdValueTest()
+        {
+            Assert.AreEqual(1, fanOutput.Id = 1);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void IdValueNegativeTest()
+        {
+            fanOutput.Id = -1;
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void IdValueZeroTest()
+        {
+            fanOutput.Id = 0;
+        }
+
     }
 }

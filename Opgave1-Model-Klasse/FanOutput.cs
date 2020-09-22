@@ -15,7 +15,17 @@ namespace Opgave1_Model_Klasse
         public int Id 
         { 
             get { return _id; }
-            set { _id = value; } 
+            set 
+            {
+                if (value > 0)
+                {
+                _id = value; 
+                } 
+                else
+                {
+                    throw new ArgumentOutOfRangeException("Id", "Id må ikke være 0 eller negativ.");
+                }
+            } 
         }
         public string Name 
         { 
