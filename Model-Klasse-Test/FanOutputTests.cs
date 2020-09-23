@@ -9,10 +9,16 @@ namespace Model_Klasse_Test
     [TestClass]
     public class FanOutputTests
     {
-        FanOutput fanOutput = new FanOutput();
+        FanOutput fanOutput = new FanOutput()
+        {
+            Id = 1,
+            Name = "First Output",
+            Temperature = 20,
+            Humidity = 50
+        };
 
         [TestMethod]
-        public void AtLeastTwoCharactersInNameTest()
+        public void NameTest()
         {
             Assert.AreEqual("Karl", fanOutput.Name = "Karl");
             Assert.AreEqual("Ib", fanOutput.Name = "Ib");
@@ -24,6 +30,14 @@ namespace Model_Klasse_Test
             catch (ArgumentOutOfRangeException ex)
             {
                 Assert.AreEqual("Navn skal mindst indeholde 2 eller flere bogstaver (Parameter 'Navn')", ex.Message);
+            }
+            try
+            {
+                fanOutput.Name = null;
+                Assert.Fail();
+            }
+            catch (NullReferenceException)
+            {
             }
         }
 

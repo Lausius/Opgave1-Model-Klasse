@@ -32,13 +32,17 @@ namespace Opgave1_Model_Klasse
             get { return _name; }
             set
             {
-                if (value.Length >= 2)
+                if (value.Length >= 2 && value != null)
                 {
                     _name = value;
                 }
-                else
+                else if(value.Length < 2)
                 {
                     throw new ArgumentOutOfRangeException("Navn", "Navn skal mindst indeholde 2 eller flere bogstaver");
+                }
+                else if(value == null)
+                {
+                    throw new NullReferenceException("Navn må ikke være tomt");
                 }
             }
         }
