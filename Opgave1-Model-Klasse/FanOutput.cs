@@ -64,7 +64,7 @@ namespace Opgave1_Model_Klasse
             {
                 if (value >= 30 && value <= 80)
                 {
-                    _temperature = value;
+                    _humidity = value;
                 }
                 else
                 {
