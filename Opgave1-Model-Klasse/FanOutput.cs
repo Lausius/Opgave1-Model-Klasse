@@ -12,42 +12,45 @@ namespace Opgave1_Model_Klasse
         private double _temperature;
         private double _humidity;
 
-        public int Id 
-        { 
+        public int Id
+        {
             get { return _id; }
-            set 
+            set
             {
                 if (value > 0)
                 {
-                _id = value; 
-                } 
+                    _id = value;
+                }
                 else
                 {
-                    throw new ArgumentOutOfRangeException("Id", "Id må ikke være 0 eller negativ.");
+                    throw new ArgumentOutOfRangeException("Id", "Id må ikke være 0 eller negativ");
                 }
-            } 
+            }
         }
-        public string Name 
-        { 
+        public string Name
+        {
             get { return _name; }
             set
             {
-                if (value.Length >= 2 && value != null)
+                if (value != null)
                 {
-                    _name = value;
+                    if (value.Length >= 2)
+                    {
+                        _name = value;
+                    }
+                    else
+                    {
+                        throw new ArgumentOutOfRangeException("Navn", "Navn skal mindst indeholde 2 eller flere bogstaver");
+                    }
                 }
-                else if(value.Length < 2)
-                {
-                    throw new ArgumentOutOfRangeException("Navn", "Navn skal mindst indeholde 2 eller flere bogstaver");
-                }
-                else if(value == null)
+                else
                 {
                     throw new NullReferenceException("Navn må ikke være tomt");
                 }
             }
         }
-        public double Temperature 
-        { 
+        public double Temperature
+        {
             get { return _temperature; }
             set
             {
@@ -61,8 +64,8 @@ namespace Opgave1_Model_Klasse
                 }
             }
         }
-        public double Humidity 
-        { 
+        public double Humidity
+        {
             get { return _humidity; }
             set
             {
